@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using web_api.Model;
+using web_api.Services;
 
 namespace web_api.Controllers
 {
@@ -8,17 +7,24 @@ namespace web_api.Controllers
     [ApiController]
     public class IPController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly IIPService _service;
 
-        public IPController(DataContext context)
+        public IPController(IIPService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [HttpGet("{ip}")]
-        public async Task<ActionResult<string>> GetIPInfo(string ip)
+        public async Task<ActionResult> GetIPInfo(string ip)
         {
-            return Ok(ip);
+            try
+            {
+                return Ok(await _service.GetIpDetails(ip));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

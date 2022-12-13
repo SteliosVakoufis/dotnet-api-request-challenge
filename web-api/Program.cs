@@ -1,4 +1,8 @@
+using ipstack_lib;
+using ipstack_lib.interfaces;
 using web_api.Model;
+using web_api.Services;
+using web_api.utils;
 
 internal class Program
 {
@@ -8,7 +12,12 @@ internal class Program
 
         // Add services to the container.
 
+        builder.Services.AddScoped<IIPInfoProvider, IPInfoProvider>();
+        builder.Services.AddScoped<IPServiceImpl>();
+        builder.Services.AddScoped<IIPService, CachedIPService>();
+        builder.Services.AddScoped<WebApiUtils>();
 
+        builder.Services.AddMemoryCache();
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
