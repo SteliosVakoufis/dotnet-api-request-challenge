@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ipstack-lib", "ipstack-lib\ipstack-lib\ipstack-lib.csproj", "{2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-api", "web-api\web-api.csproj", "{FD159064-07A3-47D5-82D2-293514208B6D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C} = {2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRunner", "ipstack-lib\TestRunner\TestRunner.csproj", "{FC772FED-0B08-4A7E-9A30-52C0B72EC123}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FD159064-07A3-47D5-82D2-293514208B6D} = {FD159064-07A3-47D5-82D2-293514208B6D}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B3A6CAA-81FA-44E9-BE93-D609F32F3A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD159064-07A3-47D5-82D2-293514208B6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD159064-07A3-47D5-82D2-293514208B6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD159064-07A3-47D5-82D2-293514208B6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD159064-07A3-47D5-82D2-293514208B6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC772FED-0B08-4A7E-9A30-52C0B72EC123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC772FED-0B08-4A7E-9A30-52C0B72EC123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC772FED-0B08-4A7E-9A30-52C0B72EC123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC772FED-0B08-4A7E-9A30-52C0B72EC123}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79473181-33E1-493A-9268-B216D989FFA2}
+	EndGlobalSection
+EndGlobal

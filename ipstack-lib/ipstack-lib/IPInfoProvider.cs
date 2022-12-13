@@ -20,7 +20,7 @@ namespace ipstack_lib
             var responseString = response.Content.ReadAsStringAsync().Result;
             var jsonObj = JObject.Parse(responseString);
 
-            if (jsonObj.ContainsKey("success") && !(bool)jsonObj["success"])
+            if (jsonObj.ContainsKey("success") && !(bool)jsonObj["success"]!)
             {
                 throw new IPServiceNotAvailableException("IP service not available, Please try again.");
             }
@@ -34,6 +34,7 @@ namespace ipstack_lib
             {
                 return new()
                 {
+                    IP = (string)jsonObj["ip"]!,
                     City = (string)jsonObj["city"]!,
                     Country = (string)jsonObj["country_name"]!,
                     Continent = (string)jsonObj["continent_name"]!,

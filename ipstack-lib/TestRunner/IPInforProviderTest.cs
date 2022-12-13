@@ -17,10 +17,13 @@ namespace TestRunner
         [Test]
         public async Task ShouldReturnCorrectIPDetails()
         {
-            var result = await _ipInfoProvider.GetDetails("134.201.250.155");
+            const string ip = "134.201.250.155";
+
+            var result = await _ipInfoProvider.GetDetails(ip);
 
             Assert.IsNotNull(result);
 
+            Assert.AreEqual(ip, result.IP);
             Assert.AreEqual("Los Angeles", result.City);
             Assert.AreEqual("United States", result.Country);
             Assert.AreEqual("North America", result.Continent);
