@@ -29,7 +29,7 @@ namespace web_api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateIPInfo([FromBody] List<IPInfoEntity> entities)
+        public async Task<ActionResult> BatchUpdateIPInfo([FromBody] List<IPInfoEntity> entities)
         {
             try
             {
