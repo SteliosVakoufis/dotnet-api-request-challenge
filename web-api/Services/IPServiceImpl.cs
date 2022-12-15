@@ -1,6 +1,7 @@
 ﻿using ipstack_lib.exceptions;
 using ipstack_lib.interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using web_api.Model;
 using web_api.utils;
 
@@ -17,6 +18,18 @@ namespace web_api.Services
             _context = context;
             _ipProdiver = ipProdiver;
             _utils = utils;
+        }
+
+        public Task<List<IPInfoEntity>> GetAllIpDetails()
+        {
+            try
+            {
+                return _context.IPInfo.ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<IPInfoEntity> GetIpDetails(string ip)

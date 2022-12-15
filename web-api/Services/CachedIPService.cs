@@ -14,13 +14,18 @@ namespace web_api.Services
             _memoryCache = memoryCache;
         }
 
+        public Task<List<IPInfoEntity>> GetAllIpDetails()
+        {
+            return _decorated.GetAllIpDetails();
+        }
+
         public Task<IPInfoEntity> GetIpDetails(string ip)
         {
             return _memoryCache.GetOrCreateAsync(
                 ip,
                 entry =>
                 {
-                    entry.SetAbsoluteExpiration(TimeSpan.FromMinutes(2));
+                    entry.SetAbsoluteExpiration(TimeSpan.FromMinutes(1));
 
                     return _decorated.GetIpDetails(ip);
                 })!;
