@@ -7,5 +7,6 @@ namespace web_api.Services
     public interface IIPService
     {
         public Task<IPInfoEntity> GetIpDetails(string ip);
+        public Task<List<IPInfoEntity>> UpdateIpDetails(List<IPInfoEntity> entities);
     }
 }

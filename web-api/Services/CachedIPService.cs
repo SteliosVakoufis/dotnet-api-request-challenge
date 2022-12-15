@@ -25,5 +25,10 @@ namespace web_api.Services
                     return _decorated.GetIpDetails(ip);
                 })!;
         }
+
+        public Task<List<IPInfoEntity>> UpdateIpDetails(List<IPInfoEntity> entities)
+        {
+            return _decorated.UpdateIpDetails(entities);
+        }
     }
 }

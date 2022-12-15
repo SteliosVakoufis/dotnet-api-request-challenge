@@ -8,21 +8,21 @@ namespace web_api.Model
     public class IPInfoEntity
     {
         [Key, Required, Column("ip"), RegularExpression(@"^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$")]
-        public string IP { get; set; } = string.Empty;
+        public string? IP { get; set; }
 
-        [Required, Column("city")]
-        public string City { get; set; } = string.Empty;
+        [Column("city")]
+        public string? City { get; set; }
 
-        [Required, Column("country")]
-        public string Country { get; set; } = string.Empty;
+        [Column("country")]
+        public string? Country { get; set; }
 
-        [Required, Column("continent")]
-        public string Continent { get; set; } = string.Empty;
+        [Column("continent")]
+        public string? Continent { get; set; }
 
-        [Required, Column("latitude")]
-        public double Latitude { get; set; }
+        [Column("latitude")]
+        public double? Latitude { get; set; }
 
-        [Required, Column("longitude")]
-        public double Longitude { get; set; }
+        [Column("longitude")]
+        public double? Longitude { get; set; }
     }
 }

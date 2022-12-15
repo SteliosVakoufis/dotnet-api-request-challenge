@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using web_api.Model;
 using web_api.Services;
 
 namespace web_api.Controllers
@@ -21,9 +22,22 @@ namespace web_api.Controllers
             {
                 return Ok(await _service.GetIpDetails(ip));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateIPInfo([FromBody] List<IPInfoEntity> entities)
+        {
+            try
+            {
+                return Ok(await _service.UpdateIpDetails(entities));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
     }
