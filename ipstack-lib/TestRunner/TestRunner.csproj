@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\web-api\web-api.csproj" />
     <ProjectReference Include="..\ipstack-lib\ipstack-lib.csproj" />
   </ItemGroup>
 

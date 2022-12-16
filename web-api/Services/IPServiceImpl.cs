@@ -73,14 +73,16 @@ namespace web_api.Services
                     iPInfoEntity.Longitude = entity.Longitude ?? iPInfoEntity.Longitude;
 
                     result.Add(iPInfoEntity);
-                    await _context.IPInfo.AddAsync(iPInfoEntity);
                 }
+
+                await _context.SaveChangesAsync();
 
                 return result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw new IPServiceNotAvailableException(e.Message);
+                throw;
+                //throw new IPServiceNotAvailableException(e.Message);
             }
         }
     }
