@@ -1,5 +1,6 @@
 using ipstack_lib;
 using ipstack_lib.interfaces;
+using web_api.Jobs;
 using web_api.Model;
 using web_api.Services;
 using web_api.utils;
@@ -16,6 +17,9 @@ internal class Program
         builder.Services.AddScoped<IPServiceImpl>();
         builder.Services.AddScoped<IIPService, CachedIPService>();
         builder.Services.AddScoped<WebApiUtils>();
+
+        builder.Services.AddSingleton<BackgroundJobs>();
+        builder.Services.AddHostedService<JobsBackgroundService>();
 
         builder.Services.AddMemoryCache();
         builder.Services.AddControllers();

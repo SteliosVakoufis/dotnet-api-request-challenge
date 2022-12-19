@@ -1,6 +1,6 @@
 ﻿using ipstack_lib.exceptions;
 using ipstack_lib.interfaces;
-using Microsoft.AspNetCore.Mvc;
+using web_api.Jobs;
 using web_api.Model;
 using web_api.utils;
 
@@ -10,13 +10,47 @@ namespace web_api.Services
     {
         private readonly DataContext _context;
         private readonly IIPInfoProvider _ipProdiver;
+        private readonly BackgroundJobs _jobs;
         private readonly WebApiUtils _utils;
+        private readonly ILogger<IPServiceImpl> _logger;
 
-        public IPServiceImpl(DataContext context, IIPInfoProvider ipProdiver, WebApiUtils utils)
+        public IPServiceImpl(DataContext context, IIPInfoProvider ipProdiver, BackgroundJobs jobs, WebApiUtils utils, ILogger<IPServiceImpl> logger)
         {
             _context = context;
             _ipProdiver = ipProdiver;
+            _jobs = jobs;
             _utils = utils;
+            _logger = logger;
+        }
+
+        public Guid CreateNewUpdateJob(Queue<IPInfoEntity> entities)
+        {
+            var job = new JobDTO()
+            {
+                Id = Guid.NewGuid(),
+                ProcessQueue = entities,
+                Status = "Queued"
+            };
+
+            _jobs.QueuedTasks.Add(job.Id, job);
+            _logger.LogInformation("Job Queued with guid {id}", job.Id);
+
+            return job.Id;
+        }
+
+        public JobDTO GetJobInfo(Guid id)
+        {
+            if (_jobs.CompletedTasks.TryGetValue(id, out var completedJob))
+            {
+                return completedJob;
+            }
+
+            if (_jobs.QueuedTasks.TryGetValue(id, out var queuedJob))
+            {
+                return queuedJob;
+            }
+
+            return new JobDTO();
         }
 
         public async Task<IPInfoEntity> GetIpDetails(string ip)
@@ -73,15 +107,20 @@ namespace web_api.Services
                     iPInfoEntity.Longitude = entity.Longitude ?? iPInfoEntity.Longitude;
 
                     result.Add(iPInfoEntity);
-                    await _context.IPInfo.AddAsync(iPInfoEntity);
                 }
 
+                await _context.SaveChangesAsync();
                 return result;
             }
             catch (Exception e)
             {
                 throw new IPServiceNotAvailableException(e.Message);
             }
+        }
+
+        public void SetCompletedJobInfo(JobDTO job)
+        {
+            throw new NotImplementedException();
         }
     }
 }
