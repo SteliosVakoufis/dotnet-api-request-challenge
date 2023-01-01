@@ -1,4 +1,4 @@
-# csharp-api-request-challenge
+# dotnet-api-request-challenge
 A WebApi exercise for csharp
 
 A user can make an api call to this service which then in turn makes an api call to IPStack
